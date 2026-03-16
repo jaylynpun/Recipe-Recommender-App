@@ -1,0 +1,15 @@
+body {
+    background-color: #E6DEDE;
+}
+
+#web-name-div {
+    display: flex;
+    justify-content: center;
+    width: 60vw;
+}
+
+#title img {
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+}

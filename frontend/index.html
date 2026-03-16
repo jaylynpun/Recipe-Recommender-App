@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container py-4">
+         <!-- Title -->
+        <div class="row mb-4">
+            <div class="d-flex align-items-center justify-content-center gap-2" id="title">
+                <h3>
+                    Recipe Gallery
+                    <img src="assets/cooking.png" alt="cooking-icon">
+                </h3>
+            </div>
+        </div>
+        <!-- Search area -->
+        <div class="row mb-4 position-relative">
+            <div class="col-lg-8 mx-auto">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for recipes">
+                    <button class="btn btn-outline-secondary">
+                        <i class="bi bi-funnel"></i>
+                    </button>
+                    <button class="btn btn-outline-dark" id="search-recipes-btn">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards view area -->
+        <div class="row g-4" id="recipe-container"></div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
