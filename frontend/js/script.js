@@ -1,9 +1,9 @@
 async function getRecipes(ingredient="") {
     try {
         const resp = await fetch(`/api/recipes?ingredients=${encodeURIComponent(ingredient)}`);
-        const data = await resp.json();
-        console.log(data.results); 
-        displayRecipes(data.results);
+        const recipes = await resp.json();
+        console.log(recipes); 
+        displayRecipes(recipes);
     } catch (err) {
         console.error(err);
     }
@@ -15,10 +15,19 @@ function displayRecipes(recipes) {
     container.innerHTML = "";
 
     recipes.forEach(recipe => {
+
         const ingredients = recipe.extendedIngredients
         ? recipe.extendedIngredients.map(i => i.name).join(", ")
         : "N/A";
-        const diet = recipe.diets || [].join(", ") || "None";
+
+        const diets = recipe.diets && recipe.diets.length > 0 
+        ? recipe.diets.join(", ")
+        : "None";
+
+        const summary = recipe.summary
+        ? recipe.summary.replace(/<[^>]*>/g,"").slice(0,120)
+        : "";
+
         const card = `
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100">
@@ -26,13 +35,13 @@ function displayRecipes(recipes) {
                     <div class="card-body">
                         <h5 class="card-title">${recipe.title}</h5>
                         <p class="card-text">
-                            ${recipe.summary || "".replace(/<[^>]*>/g,"").slice(0,120)}...
-                        </p>
+                            ${summary}...
+                        </p> 
                     </div>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <strong>Dietary restrictions:</strong> ${diet}
+                            <strong>Dietary restrictions:</strong> ${diets}
                         </li>
                         <li class="list-group-item">
                             <strong>Ingredients:</strong> ${ingredients}
