@@ -11,6 +11,18 @@ async function getRecipes(ingredient = "") {
 
 function displayRecipes(recipes) {
     const container = document.getElementById("recipe-container");
+
+    if (!Array.isArray(recipes)) {
+        container.innerHTML = "<p>Error loading recipes.</p>";
+        console.error(recipes);
+        return;
+    }
+
+    if(recipes.length === 0) {
+        container.innerHTML = "<p>No recipes found</p>";
+        return;
+    }
+
     container.innerHTML = "";
 
     recipes.forEach(recipe => {
@@ -57,11 +69,6 @@ function displayRecipes(recipes) {
         `;
 
         container.innerHTML += card;
-
-        if(recipes.length === 0) {
-            container.innerHTML = "<p>No recipes found</p>";
-            return;
-        }
     });
 }
 
