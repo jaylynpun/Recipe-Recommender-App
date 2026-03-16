@@ -1,6 +1,6 @@
-async function getRecipes() {
+async function getRecipes(ingredient = "") {
     try {
-        const resp = await fetch(`/api/recipes`);
+        const resp = await fetch(`/api/recipes?ingredients=${encodeURIComponent(ingredient)}`);
         const recipes = await resp.json();
         console.log(recipes); 
         displayRecipes(recipes);
@@ -68,9 +68,6 @@ function displayRecipes(recipes) {
 document.getElementById("search-recipes-btn").addEventListener("click", () => {
     const query = document.getElementById("search-bar").value.trim();
     if (query) {
-        fetch(`api/recipes?ingredients=${encodeURIComponent(query)}`)
-            .then(resp => resp.json)
-            .then(displayRecipes);
         getRecipes(query);
     }
 });

@@ -14,7 +14,7 @@ export async function handler(event) {
         const url = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&fillIngredients=true&number=12${ingredient ? `&includeIngredients=${encodeURIComponent(ingredient)}` : ""}&apiKey=${apiKey}`;
         
         const resp = await fetch(url);
-        const data = resp.json();
+        const data = await resp.json();
 
         return {
             statusCode: 200,
