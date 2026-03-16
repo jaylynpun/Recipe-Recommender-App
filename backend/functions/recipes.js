@@ -12,10 +12,6 @@ export async function handler(event) {
         const ingredients = (params.ingredients || "chicken").trim();
         const diet = (params.diet || "").trim();
 
-        if (!ingredients) {
-            return json(400, { error: "Please provide at least one ingredient" });
-        }
-
         const sp = new URL("https://api.spoonacular.com/recipes/complexSearch");
         sp.searchParams.set("apiKey", apiKey);
         sp.searchParams.set("includeIngredients", ingredients);
@@ -48,7 +44,7 @@ export async function handler(event) {
                 sourceUrl: r.sourceUrl || null,
                 summary: r.summary || "",
                 diet: r.diet || [],
-                ingredients: r.extendedIngredients?.map(i => i.original) || []
+                ingredients: r.extendedIngredients?.map(i => i.name) || []
             }))
             : [];
         return json(200, { results });

@@ -1,17 +1,6 @@
-// async function searchRecipes() {
-//     const ingredient = document.getElementById("searchInput").value;
-
-//     const resp = await fetch(
-//         `/api/recipes?ingredients=${ingredient}`
-//     );
-//     const data = await resp.json();
-
-//     displayRecipes(data);
-// }
- 
-async function getRecipes(ingredient) {
+async function getRecipes(ingredient="") {
     try {
-        const resp = await fetch(`/api/recipes?ingredients=${ingredient}`);
+        const resp = await fetch(`/api/recipes?ingredients=${encodeURIComponent(ingredient)}`);
         const data = await resp.json();
         console.log(data.results); 
         displayRecipes(data.results);
@@ -70,4 +59,6 @@ document.getElementById("search-recipes-btn").addEventListener("click", () => {
     }
 });
 
-getRecipes("chicken");
+document.addEventListener("DOMContentLoaded", () => {
+    getRecipes();
+});
