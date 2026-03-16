@@ -9,7 +9,15 @@
 //     displayRecipes(data);
 // }
  
-const API_KEY = "8f0e0114cb824717b30d1a33e1e88fbd"; 
+const API_KEY = "your-api-key-here";
+
+const btn = document.getElementById("search-recipes-btn");
+
+btn.addEventListener("click", async () => {
+  const ingredient = document.getElementById("ingredient-input").value;
+
+  await getRecipes(ingredient);
+});
 
 async function getRecipes(ingredient) {
     try {
