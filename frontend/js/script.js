@@ -9,16 +9,12 @@
 //     displayRecipes(data);
 // }
  
-const API_KEY = "8f0e0114cb824717b30d1a33e1e88fbd"; 
-
 async function getRecipes(ingredient) {
     try {
-        const resp = await fetch(
-            `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}&apiKey=${API_KEY}`
-        );
+        const resp = await fetch(`/api/recipes?ingredients=${ingredient}`);
         const data = await resp.json();
-        console.log(data); 
-        displayRecipes(data)
+        console.log(data.results); 
+        displayRecipes(data.results);
     } catch (err) {
         console.error(err);
     }
@@ -30,8 +26,10 @@ function displayRecipes(recipes) {
     container.innerHTML = "";
 
     recipes.forEach(recipe => {
-        const ingredients = recipe.usedIngredients.map(i => i.name).join(", ");
-        const diet = recipe.diet.join(", ") || "None";
+        const ingredients = recipe.extendedIngredients
+        ? recipe.extendedIngredients.map(i => i.name).join(", ")
+        : "N/A";
+        const diet = recipe.diets || [].join(", ") || "None";
         const card = `
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100">
@@ -39,7 +37,7 @@ function displayRecipes(recipes) {
                     <div class="card-body">
                         <h5 class="card-title">${recipe.title}</h5>
                         <p class="card-text">
-                            ${recipe.summary.replace(/<[^>]*>/g,"").slice(0,120)}...
+                            ${recipe.summary || "".replace(/<[^>]*>/g,"").slice(0,120)}...
                         </p>
                     </div>
 
@@ -64,3 +62,12 @@ function displayRecipes(recipes) {
         container.innerHTML += card;
     });
 }
+
+document.getElementById("search-recipes-btn").addEventListener("click", () => {
+    const query = document.getElementById("search-bar").value.trim();
+    if (query) {
+        getRecipes(query);
+    }
+});
+
+getRecipes("chicken");
