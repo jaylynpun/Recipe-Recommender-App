@@ -80,4 +80,4 @@ document.getElementById("search-recipes-btn").addEventListener("click", () => {
     }
 });
 
-getRecipes("chicken");
+// getRecipes("chicken");
