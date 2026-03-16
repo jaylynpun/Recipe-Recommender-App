@@ -9,6 +9,16 @@
 //     displayRecipes(data);
 // }
  
+const API_KEY = "your-api-key-here";
+
+const btn = document.getElementById("search-recipes-btn");
+
+btn.addEventListener("click", async () => {
+  const ingredient = document.getElementById("ingredient-input").value;
+
+  await getRecipes(ingredient);
+});
+
 async function getRecipes(ingredient) {
     try {
         const resp = await fetch(`/api/recipes?ingredients=${ingredient}`);
@@ -70,4 +80,4 @@ document.getElementById("search-recipes-btn").addEventListener("click", () => {
     }
 });
 
-getRecipes("chicken");
+// getRecipes("chicken");
