@@ -1,6 +1,6 @@
-async function getRecipes(ingredient="") {
+async function getRecipes() {
     try {
-        const resp = await fetch(`/api/recipes?ingredients=${encodeURIComponent(ingredient)}`);
+        const resp = await fetch(`/api/recipes`);
         const recipes = await resp.json();
         console.log(recipes); 
         displayRecipes(recipes);
@@ -11,7 +11,6 @@ async function getRecipes(ingredient="") {
 
 function displayRecipes(recipes) {
     const container = document.getElementById("recipe-container");
-
     container.innerHTML = "";
 
     recipes.forEach(recipe => {
@@ -58,16 +57,23 @@ function displayRecipes(recipes) {
         `;
 
         container.innerHTML += card;
+
+        if(recipes.length === 0) {
+            container.innerHTML = "<p>No recipes found</p>";
+            return;
+        }
     });
 }
 
 document.getElementById("search-recipes-btn").addEventListener("click", () => {
     const query = document.getElementById("search-bar").value.trim();
     if (query) {
+        fetch(`api/recipes?ingredients=${encodeURIComponent(query)}`)
+            .then(resp => resp.json)
+            .then(displayRecipes);
         getRecipes(query);
     }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    getRecipes();
-});
+
+getRecipes();

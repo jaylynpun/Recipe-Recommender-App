@@ -8,7 +8,7 @@ export async function handler(event) {
         return json(500, { error: "Missing api key" });
     }
 
-    const ingredient = event.queryStringParameters?.ingredients || "";
+    const ingredient = event.queryStringParameters?.ingredients?.trim() || "chicken";
 
     try {
         const url = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&fillIngredients=true&number=12${ingredient ? `&includeIngredients=${encodeURIComponent(ingredient)}` : ""}&apiKey=${apiKey}`;
