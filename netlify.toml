@@ -1,6 +1,7 @@
 [build]
 functions = "backend/functions"
 publish = "frontend"
+command = "echo 'No build step'"
 
 [[redirects]]
 from = "/api/*"
