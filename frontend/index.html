@@ -24,12 +24,49 @@
             <div class="col-lg-8 mx-auto">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for recipes" id="search-bar">
-                    <button class="btn btn-outline-secondary">
+                    <button class="btn btn-outline-secondary" id="filter-btn">
                         <i class="bi bi-funnel"></i>
                     </button>
                     <button class="btn btn-outline-dark" id="search-recipes-btn">
                         Search
                     </button>
+                </div>
+                <div id="filter-dropdown" class="card p-3 position-absolute bg-white shadow" style="display: none; width: 300px; z-index: 1000;">
+                    <div id="filter-menu-top">
+                        <h4>Filters</h4>
+                        <button type="submit" id="save-btn" class="btn">Save</button>
+                    </div>
+
+                    <div class="dropdown">
+                        <div class="dropdown-arrow-div">
+                            <button class="btn btn-secondary" type="button" id="ingr-dropdown-btn">
+                                Ingredients
+                            </button>
+                            <img src="assets/down-arrow.png" alt="down arrow">
+                            <!-- https://www.flaticon.com/free-icon/down-arrow_2985150?term=arrow&page=1&position=12&origin=tag&related_id=2985150 -->
+                        </div>
+                        <ul class="dropdown-menu" id="ingr-list" style="display: none;" aria-labelledby="ingr-dropdown">
+                            <li class="filter-option" data-value="ingredient1">Ingredient 1</li>
+                            <li class="filter-option" data-value="ingredient2">Ingredient 2</li>
+                            <li class="filter-option" data-value="ingredient3">Ingredient 3</li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown">
+                        <div class="dropdown-arrow-div">
+                            <button class="btn btn-secondary" type="button" id="diet-dropdown-btn">
+                                Diets
+                            </button>
+                            <img src="assets/down-arrow.png" alt="down arrow">
+                            <!-- https://www.flaticon.com/free-icon/down-arrow_2985150?term=arrow&page=1&position=12&origin=tag&related_id=2985150 -->
+                        </div>
+                        <ul class="dropdown-menu" id="diet-list" style="display: none;" aria-labelledby="diet-dropdown">
+                            <li class="filter-option" data-value="ingredient1">Diet 1</li>
+                            <li class="filter-option" data-value="ingredient2">Diet 2</li>
+                            <li class="filter-option" data-value="ingredient3">Diet 3</li>
+                        </ul>
+                    </div>
+                    
                 </div>
             </div>
         </div>

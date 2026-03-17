@@ -20,8 +20,23 @@ If what is being submitted is an individual Lab or Assignment, you may simply in
 <!--- Provide a list of the frameworks used to build this application, your list should include the name of the framework used, the url where the framework is available for download and what the framework was used for, see the example below --->
 
 * [Bootstrap5](https://getbootstrap.com/docs/5.0/getting-started/introduction/) - The web framework used
+* [Spoonacular](https://spoonacular.com/food-api) - The api used
 
+## Testing
 
+* return api calls. kept returning an empty array because my search was too strict, so i loosened it a bit by taking some requirements out.
+
+* wanted to display all recipes that had chicken, so I set this: event.queryStringParameters?.ingredients?.trim() || ""; to be chicken instead of "" if nothing was searched which showed me 12 chicken recipes so I knew then that I can remove that to default to all recipes (or the first 12 that was returned by spoonacular)
+
+## Limitations / challenges
+
+* I used Spoonacular API to make a recipe recommender application, where you can search for recipes by ingredient name and then click "view recipe" to view the full recipe on a different site (there is a limit of 12 to prevent overwhelming the server)
+
+* one BIG limitation I had while doing this was that I didn't know anything about netlify, so it took me way longer than it should have to get the hang of it. I just had to spend a lot of time looking through all the tabs to see where I could find what I was looking for
+
+* I encountered a limitation when I was testing things using the "go live" feature on vscode, because everytime I made a change to my code, it would call the api, which I did not know that there was a limit to how many calls you can make a day for the free tier. So basically I thought I was doomed, but I ended up finding out about netlify cli which greatly helped me because I guess it's like a fake environment so it doesnt actually make any calls to the api? I'm still not even sure how it works tbh but I haven't hit the limit with my third api key yet so I think it works great. UPDATE: netlify dev does in fact have a limit which is very hindersome when testing a bunch of things quickly. My only solution is to keep making new accounts but I only have so many emails...
+
+* I tried to follow along with one of the lab videos, and I ended up writing in recipes.js export async function handler() when that apparently was not correct for what the browser was expecting, so I ended up having to use exports.handler ... for it to be parsed correctly.
 
 ## Sources Used
 

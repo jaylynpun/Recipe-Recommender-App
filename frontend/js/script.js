@@ -72,6 +72,56 @@ function displayRecipes(recipes) {
     });
 }
 
+const filterBtn = document.getElementById("filter-btn");
+const filterDropdown = document.getElementById("filter-dropdown");
+const save = document.getElementById("save-btn");
+
+filterBtn.addEventListener("click", () => {
+    filterDropdown.style.display = filterDropdown.style.display === "none" ? "flex" : "none";
+});
+
+save.addEventListener("click", () => {
+    const selectedIngredients = Array.from(document.querySelectorAll("#ingr-list .filter-option.selected")).map(el => el.dataset.value);
+    const selectedDiets = Array.from(document.querySelectorAll("#diet-list .filter-option.selected")).map(el => el.dataset.value);
+    getRecipesWithFilters({ ingredients: selectedIngredients, diets: selectedDiets });
+    filterDropdown.style.display = "none";
+});
+
+// filter menu - ingredients listeners
+const ingrBtn = document.getElementById("ingr-dropdown-btn");
+const ingrList = document.getElementById("ingr-list");
+
+ingrBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    ingrList.style.display = ingrList.style.display === "none" ? "block" : "none";
+});
+
+ingrList.querySelectorAll(".filter-option").forEach(li => {
+    li.addEventListener("click", () => li.classList.toggle("selected"));
+});
+
+// filter menu - diets listeners
+// hopefully this doesnt break anything cause I cant see it anymore since the Ive reached the api call limit yet again
+const dietsBtn = document.getElementById("diet-dropdown-btn");
+const dietsList = document.getElementById("diet-list");
+
+dietsBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    dietsList.style.display = dietsList.style.display === "none" ? "block" : "none";
+});
+
+dietsList.querySelectorAll(".filter-option").forEach(li => {
+    li.addEventListener("click", () => li.classList.toggle("selected"));
+});
+
+window.addEventListener("click", (e) => {
+    if(!filterDropdown.contains(e.target) && !filterBtn.contains(e.target)) {
+        filterDropdown.style.display = "none";
+        displayRecipes(ingredient);
+    }
+});
+
+// search recipes using search bar
 document.getElementById("search-recipes-btn").addEventListener("click", () => {
     const query = document.getElementById("search-bar").value.trim();
     if (query) {

@@ -15,7 +15,7 @@ exports.handler = async function(event) {
         }
     }
 
-    const ingredient = event.queryStringParameters?.ingredients?.trim() || "chicken";
+    const ingredient = event.queryStringParameters?.ingredients?.trim() || "";
 
     try {
         const url = `https://api.spoonacular.com/recipes/complexSearch?query=${encodeURIComponent(ingredient)}&addRecipeInformation=true&fillIngredients=true&number=12&apiKey=${apiKey}`;
